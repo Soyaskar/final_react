@@ -8,7 +8,8 @@ const CustomFormField = ({ name, placeholder, onChange, errorMessage, type, valu
         name={name}
         onChange={onChange}
         type={type}
-        value={value} />
+        value={value}
+      />
       {
         errorMessage && <p className="field_error_msg">{errorMessage}</p>
       }

@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
-import data from '../data.json'
+import { useFormContext } from './form';
+
 function Details() {
-  const { name, email, phone, addresses } = data;
-  const [temporaryAddress, permanentAddress] = addresses;
-  const { province, district, municipality, ward, tole, addressType } = temporaryAddress;
-  const { province: pProvince, district: pDistrict, municipality: pMunicipality, ward: pWard, tole: pTole, addressType: pAddressType } = permanentAddress;
+  const { submittedData } = useFormContext();
+  const [showDetails, setShowDetails] = useState({});
 
-  const [showDetails, setShowDetails] = useState(false);
-
-  const handleViewDetail = () => {
-    setShowDetails(!showDetails);
+  const handleViewDetail = (index) => {
+    setShowDetails(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
   };
-  return(
+
+  return (
     <div className="container">
       <div className="header">
         <h2>Student Record System</h2>
         <div className="buttons">
           <button>Add Record</button>
-          <button onClick={handleViewDetail}>View Record</button>
+          <button>View Record</button>
         </div>
       </div>
       <table className="table">
@@ -27,61 +28,63 @@ function Details() {
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Citizenship</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <td>1</td>
-          <td>{name}</td>
-          <td>{email}</td>
-          <td>{phone}</td>
-          <td><button className="action-btn" onClick={handleViewDetail}>View Detail</button></td>
-          //only able to view the given data i.e available in data.json
+          {submittedData.map((record, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{record.name}</td>
+              <td>{record.email}</td>
+              <td>{record.phone}</td>
+              <td>{record.citizenship || 'N/A'}</td>
+              <td>
+                <button 
+                  className="action-btn" 
+                  onClick={() => handleViewDetail(index)}
+                >
+                  {showDetails[index] ? 'Hide Detail' : 'View Detail'}
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      {showDetails && (
-      <div>
-        <h3>Addresses:</h3>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Province</th>
-              <th>District</th>
-              <th>Municipality</th>
-              <th>Ward</th>
-              <th>Tole</th>
-              <th>Address Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{province}</td>
-              <td>{district}</td>
-              <td>{municipality}</td>
-              <td>{ward}</td>
-              <td>{tole}</td>
-              <td>{addressType}</td>
-            </tr>
-            <tr>
-              <td>{pProvince}</td>
-              <td>{pDistrict}</td>
-              <td>{pMunicipality}</td>
-              <td>{pWard}</td>
-              <td>{pTole}</td>
-              <td>{pAddressType}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      )
-    }
+      {submittedData.map((record, index) => (
+        showDetails[index] && (
+          <div key={index}>
+            <h3>Addresses for {record.name}:</h3>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Province</th>
+                  <th>District</th>
+                  <th>Municipality</th>
+                  <th>Ward</th>
+                  <th>Tole</th>
+                  <th>Address Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {record.addresses.map((address, addrIndex) => (
+                  <tr key={addrIndex}>
+                    <td>{address.province}</td>
+                    <td>{address.district}</td>
+                    <td>{address.municipality}</td>
+                    <td>{address.ward}</td>
+                    <td>{address.tole}</td>
+                    <td>{address.addressType}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      ))}
     </div>
-    
-  ) 
-    
-    
-    
-  
+  )
 }
 
 export default Details
