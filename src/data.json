@@ -1,0 +1,10 @@
+{
+  "name": "Hari Bahadur Rana",
+  "email": "hari@cssewa.com",
+  "phone": "9845297865",
+  "citizenship": "3244/2344",
+  "addresses":[
+  {"province":"Bagmati", "district":"Kavrepalanchok", "municipality":"DHulikhel", "ward":"10", "tole":"Dadagaun", "addressType":"Temporary"},
+  {"province":"Bagmati", "district":"Bhaktapur", "municipality":"Madhyapur Thimi", "ward":"12", "tole":"Kausaltar", "addressType":"Temporary"}
+  ]
+}
