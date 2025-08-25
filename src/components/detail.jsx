@@ -17,7 +17,7 @@ function Details() {
         <h2>Student Record System</h2>
         <div className="buttons">
           <button>Add Record</button>
-          <button>View Record</button>
+          <button onClick={handleViewDetail}>View Record</button>
         </div>
       </div>
       <table className="table">
