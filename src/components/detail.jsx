@@ -36,6 +36,7 @@ function Details() {
           <td>{email}</td>
           <td>{phone}</td>
           <td><button className="action-btn" onClick={handleViewDetail}>View Detail</button></td>
+          //only able to view the given data i.e available in data.json
         </tbody>
       </table>
       {showDetails && (

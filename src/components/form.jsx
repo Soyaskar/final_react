@@ -155,6 +155,7 @@ function Form() {
           />
         </div>
         <input className="submit-button" type="submit" value={"Submit"}></input>
+        //Submitted data is not stored 
 
 
       </form>
