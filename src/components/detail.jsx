@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useFormContext } from './form';
+import React, { useContext, useState } from 'react';
+import { CustomFormContext } from '../customContext/custom_form_context';
 
 function Details() {
-  const { submittedData } = useFormContext();
   const [showDetails, setShowDetails] = useState({});
+  const {submittedData} = useContext(CustomFormContext)
+  console.log("in detaila : ", submittedData)
 
   const handleViewDetail = (index) => {
     setShowDetails(prev => ({
@@ -33,7 +34,7 @@ function Details() {
           </tr>
         </thead>
         <tbody>
-          {submittedData.map((record, index) => (
+          { submittedData && submittedData.map((record, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{record.name}</td>

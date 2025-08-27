@@ -3,16 +3,18 @@ import CustomFormField from "./form_fields"
 import PermaAddress from "./permaAddress"
 import TempAddress from "./tempAddress"
 import data from '../data.json'
+import { CustomFormContext } from "../customContext/custom_form_context"
 
 // Create context for sharing submitted data
-export const FormContext = createContext();
+// export const FormContext = createContext();
 
 // Initialize with data from data.json
-const initialData = [data];
+// const initialData = [data];
 
-function Form({ setSubmittedData }) {
+function Form() {
   const [allFieldsValue, setAllFieldValue] = useState({})
   const [allFieldErrors, setAllFieldErrors] = useState({})
+  const {setSubmittedData} = useContext(CustomFormContext)
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
@@ -187,5 +189,5 @@ function Form({ setSubmittedData }) {
   )
 }
 
-export const useFormContext = () => useContext(FormContext);
+// export const useFormContext = () => useContext(FormContext);
 export default Form
