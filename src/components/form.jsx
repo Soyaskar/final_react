@@ -1,8 +1,8 @@
-import React, { useState, createContext, useContext } from "react"
+import React, { useState, useContext } from "react"
 import CustomFormField from "./form_fields"
 import PermaAddress from "./permaAddress"
 import TempAddress from "./tempAddress"
-import data from '../data.json'
+
 import { CustomFormContext } from "../customContext/custom_form_context"
 
 // Create context for sharing submitted data
